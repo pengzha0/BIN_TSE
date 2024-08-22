@@ -1,6 +1,6 @@
 #!/bin/sh
 
-gpu_id=0,2,6,7
+gpu_id=4,5,6,7
 
 continue_from=
 
@@ -24,10 +24,9 @@ main.py \
 --mix_lst_path '/data/vgc/users/public/voxceleb2/uesv/mixture_data_list_2_800mix.csv' \
 --mixture_direc '/data/vgc/users/public/voxceleb2/uesv/audio_mixture/2_mix_min_train/' \
 --C 2 \
-\
---effec_batch_size 6 \
---accu_grad 1 \
---batch_size 6 \
+--effec_batch_size 4 \
+--accu_grad 0 \
+--batch_size 4 \
 \
 \
 --epochs 100 \

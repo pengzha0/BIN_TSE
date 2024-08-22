@@ -56,7 +56,7 @@ if __name__ == '__main__':
                         help='directory of audio')
 
     # Training    
-    parser.add_argument('--batch_size', default=8, type=int,
+    parser.add_argument('--batch_size', default=4, type=int,
                         help='Batch size')
     parser.add_argument('--max_length', default=6, type=int,
                         help='max_length of mixture in training')
@@ -64,9 +64,9 @@ if __name__ == '__main__':
                         help='Number of workers to generate minibatch')
     parser.add_argument('--epochs', default=100, type=int,
                         help='Number of maximum epochs')
-    parser.add_argument('--effec_batch_size', default=8, type=int,
+    parser.add_argument('--effec_batch_size', default=4, type=int,
                         help='effective Batch size')
-    parser.add_argument('--accu_grad', default=1, type=int,
+    parser.add_argument('--accu_grad', default=0, type=int,
                         help='whether to accumulate grad')
 
     # Model hyperparameters

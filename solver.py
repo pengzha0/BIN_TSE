@@ -33,6 +33,7 @@ class Solver(object):
     def _reset(self):
         self.halving = False
         if self.args.continue_from:
+            print('/home/vgc/users/zhaopeng/USEV/src/bin_tse/logs/%s/model_dict.pt' % self.args.continue_from)
             checkpoint = torch.load('logs/%s/model_dict.pt' % self.args.continue_from, map_location='cpu')
 
             self.model.load_state_dict(checkpoint['model'])
@@ -135,7 +136,7 @@ class Solver(object):
                     #     checkpoint= {'amp':self.amp.state_dict()}
                     torch.save(checkpoint, "logs/"+ self.args.log_name+"/model_dict.pt")
                     print("Fund new best model, dict saved")
-
+            torch.cuda.empty_cache()
     def _run_one_epoch(self, data_loader, state='train'):
         total_loss = 0
         self.accu_count = 0
@@ -143,7 +144,7 @@ class Solver(object):
         for i, (a_mix, a_tgt, v_tgt) in enumerate(data_loader):
             # if i>1200:
             #     break
-            if i%50==0:
+            if i%4==0:
                 print(i)
             # if i%300 == 0:
             #     print(f"{torch.cuda.memory_summary()}")
@@ -186,8 +187,8 @@ class Solver(object):
             
             total_loss += loss.data
             del a_mix,a_tgt,v_tgt,a_tgt_est,pos_snr,loss,mix_snr,max_snr,sisnri
-            if i%10==0:
-                torch.cuda.empty_cache()
+            # if i%10==0:
+            #     torch.cuda.empty_cache()
             
         return total_loss / (i+1), torch.mean(avg_sisnri/(i+1)).item()
 
